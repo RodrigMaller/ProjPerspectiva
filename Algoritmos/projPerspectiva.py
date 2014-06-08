@@ -50,10 +50,12 @@ class ProjPerspectiva:
         matrizPontos[1][j] = Y[j]
         matrizPontos[2][j] = Z[j]
         matrizPontos[3][j] = 1
+    return matrizPontos
   
   def projetarObjeto(self):
     matrizResultado = [[0 for x in range(4)] for x in range(4)]
     
     matrizResultado = [[sum(self.matrizProjecao[m][n] * self.matrizPontos[n][p] for n in range(4)) \
                       for p in range(self.objeto.nVertices)] for m in range(4)]
+    return matrizResultado
     
