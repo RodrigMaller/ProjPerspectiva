@@ -1,0 +1,9 @@
+a 1 2 3
+b 3 2 1
+c 2 1 2
+d 2 2 2
+#
+A a b c
+B a b d
+C a c d
+D b c d

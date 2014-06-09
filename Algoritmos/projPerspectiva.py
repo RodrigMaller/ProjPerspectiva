@@ -1,11 +1,10 @@
 class ProjPerspectiva:
 
   def __init__(self, pontoVista, planoProjecao, objeto):
-    self.pontoVista = pontoVista.A
+    self.pontoVista = pontoVista
     self.planoProjecao = planoProjecao
     self.objeto = objeto
     self.matrizProjecao = montarMatrizProjecao()
-    self.matrizPontos = montarMatrizPontos()
     
   def montarMatrizProjecao(self):
     matriz = [[0 for x in range(4)] for x in range(4)]
@@ -18,7 +17,7 @@ class ProjPerspectiva:
          + self.pontoVista.C*self.planoProjecao.vetorNormal[2]
     d = d0 - d1
     
-    #   Matrix de Projeção = 
+    #   Matriz de Projeção = 
     #[[d+ANx, ANy,  ANz,  -Ad0],
     # [BNx,  d+BNy, BNz,  -Bd0],
     # [CNx,   CNy, d+CNz, -Cd0],
@@ -42,20 +41,10 @@ class ProjPerspectiva:
     
     return matriz
   
-  def montarMatrizPontos(self):
-    matrizPontos = [[0 for x in range(self.objeto.nVertices)] for x in range(4)]
-    
-    for j in range(self.objeto.nVertices):
-        matrizPontos[0][j] = X[j]
-        matrizPontos[1][j] = Y[j]
-        matrizPontos[2][j] = Z[j]
-        matrizPontos[3][j] = 1
-    return matrizPontos
-  
   def projetarObjeto(self):
     matrizResultado = [[0 for x in range(4)] for x in range(4)]
     
-    matrizResultado = [[sum(self.matrizProjecao[m][n] * self.matrizPontos[n][p] for n in range(4)) \
+    matrizResultado = [[sum(self.matrizProjecao[m][n] * self.objeto.matrizPontos[n][p] for n in range(4)) \
                       for p in range(self.objeto.nVertices)] for m in range(4)]
     return matrizResultado
     

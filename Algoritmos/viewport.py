@@ -1,14 +1,8 @@
 class Viewport:
   
-  def __init__(self, xMax, xMin, yMax, yMin, uMax, uMin, vMax, vMin, matrizPontos, objeto):
-    self.xMax = xMax
-    self.xMin = xMin
-    self.yMax = yMax
-    self.yMin = yMin
-    self.uMax = uMax
-    self.uMin = uMin
-    self.vMax = vMax
-    self.vMin = vMin
+  def __init__(self, janelaMundo, janelaViewport, matrizPontos, objeto):
+    self.janelaMundo = janelaMundo
+    self.janelaViewport = janelaViewport
     self.matrizPontos = matrizPontos
     self.objeto = objeto
     self.matrizViewport = montarMatrizViewport()
