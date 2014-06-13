@@ -55,6 +55,7 @@ class App:
     self.entradaP3X = Entry(self.framePlanoProjecao, width=3)
     self.entradaP3Y = Entry(self.framePlanoProjecao, width=3)
     self.entradaP3Z = Entry(self.framePlanoProjecao, width=3)
+    self.entradaArq = Entry(self.frameObjeto, state="readonly")
     
     #Griding Entradas
     self.entradaA.grid(row=1, column=1)
@@ -71,14 +72,16 @@ class App:
     self.entradaP3Y.grid(row=3, column=2)
     self.entradaP3Z.grid(row=3, column=3)
     
+    self.entradaArq.grid(row=2, column=0, columnspan=2)
+    
     #Canvas
     self.saidaGrafica = Canvas(self.frameSaidaGrafica, width=640, height=480, bg="white")
     self.saidaGrafica.pack()
     #self.saidaGrafica.create_rectangle(100, 100, 300, 200, activefill="red", width=1)
     
     #Button
-    self.botaoObjeto = Button(self.frameObjeto, text="Escolher Objeto", command=self.arquivoObjeto).grid(row=2, column=0, columnspan=2)
-    self.botaoProjetar = Button(self.frameObjeto, text="Projetar", command=self.projetar).grid(row=3, column=0, columnspan=2)
+    self.botaoObjeto = Button(self.frameObjeto, text="Escolher Objeto", command=self.arquivoObjeto).grid(row=3, column=0, columnspan=2)
+    self.botaoProjetar = Button(self.frameObjeto, text="Projetar", command=self.projetar).grid(row=4, column=0, columnspan=2)
   
   def cartesiano(self, matriz):
     nMatriz = [[0 for x in range(len(self.objeto.matrizPontos[0]))] for x in range(3)]
@@ -106,13 +109,18 @@ class App:
         else:
           ponto1 = int(sup[i])
           ponto2 = int(sup[i+1])
-        self.saidaGrafica.create_line(round(matriz[0][ponto1]), round(matriz[1][ponto1]), round(matriz[0][ponto2]), round(matriz[1][ponto2]))
+        self.saidaGrafica.create_line(round(matriz[0][ponto1]), round(matriz[1][ponto1]), round(matriz[0][ponto2]), round(matriz[1][ponto2]), width=2, smooth=1)
   
   def arquivoObjeto(self):
     self.filename = askopenfilename()
     if self.objeto:
       del self.objeto
     self.objeto = Objeto(self.filename)
+    self.entradaArq.configure(state="normal")
+    self.entradaArq.delete(0, END)
+    self.entradaArq.insert(0, self.filename)
+    self.entradaArq.configure(state="readonly")
+    self.entradaArq.update()
   
   def projetar(self):
     self.pontoVista = PontoVista(int(self.entradaA.get()), int(self.entradaB.get()), int(self.entradaC.get()))
