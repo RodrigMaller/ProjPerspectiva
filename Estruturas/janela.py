@@ -1,4 +1,4 @@
-class janela:
+class Janela:
   
   def __init__(self, xMin, yMin, xMax, yMax):
     self.xMin = xMin

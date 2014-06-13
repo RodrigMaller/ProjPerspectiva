@@ -4,10 +4,12 @@ class PlanoProjecao:
     self.P1 = P1
     self.P2 = P2
     self.P3 = P3
-    self.vetorNormal = calcularVetorNormal()
+    self.vetorNormal = self.calcularVetorNormal()
     
   def calcularVetorNormal(self):
-    V12, V13, normal = []
+    V12 = [0, 0, 0]
+    V13 = [0, 0, 0]
+    normal = [0, 0, 0]
     
     for i in range(3):
       V12[i] = self.P2[i] - self.P1[i]

@@ -5,39 +5,41 @@ class Objeto:
     self.pontos = []
     self.nSuperficies = 0
     self.superficies = []
-    self.matrizPontos = montarMatrizPontos()
-    lerObjeto(self, filename)
+    self.lerObjeto(filename)
+    self.matrizPontos = self.montarMatrizPontos()
   
   def montarMatrizPontos(self):
     matrizPontos = [[0 for x in range(self.nPontos)] for x in range(4)]
     
     for j in range(self.nPontos):
-        matrizPontos[0][j] = pontos[j].x
-        matrizPontos[1][j] = pontos[j].y
-        matrizPontos[2][j] = pontos[j].z
+        matrizPontos[0][j] = self.pontos[j][0]
+        matrizPontos[1][j] = self.pontos[j][1]
+        matrizPontos[2][j] = self.pontos[j][2]
         matrizPontos[3][j] = 1
     return matrizPontos
   
   def lerObjeto(self, filename):
     f = open(filename)
     pontos = True
-      for linha in f:
-        linha = linha.strip()
-        if pontos and linha != "#":
-          self.addPonto(linha)
-        elif linha = "#":
-          pontos = False
-        elif not(pontos):
-          self.addSuperficie
+    for linha in f:
+      linha = linha.strip()
+      if pontos and linha != "#":
+        self.addPonto(linha)
+      elif linha == "#":
+        pontos = False
+      elif not(pontos):
+        self.addSuperficie(linha)
   
   def addPonto(self, linha):
     ponto = linha.split(' ')
-    novoPonto = Ponto(ponto[0], ponto[1], ponto[2], ponto[3])
-    self.pontos.append(novoPonto)
+    for i in range(len(ponto)):
+      ponto[i] = int(ponto[i])
+    self.pontos.append(ponto)
     self.nPontos += 1
     
   def addSuperficie(self, linha):
     superficie = linha.split(' ')
-    novaSuperficie = Superficie(superficie[0], superficie[1:], len(superficie)-1]
-    self.superficies.append(novaSuperficie)
+    for i in range(len(superficie)):
+      superficie[i] = int(superficie[i])
+    self.superficies.append(superficie)
     self.nSuperficies += 1

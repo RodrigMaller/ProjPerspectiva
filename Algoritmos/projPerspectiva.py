@@ -4,24 +4,19 @@ class ProjPerspectiva:
     self.pontoVista = pontoVista
     self.planoProjecao = planoProjecao
     self.objeto = objeto
-    self.matrizProjecao = montarMatrizProjecao()
+    self.matrizProjecao = self.montarMatrizProjecao()
     
   def montarMatrizProjecao(self):
     matriz = [[0 for x in range(4)] for x in range(4)]
     
-    d0 = self.planoProjecao.R0[0]*self.planoProjecao.vetorNormal[0] \
-         + self.planoProjecao.R0[1]*self.planoProjecao.vetorNormal[1] \
-         + self.planoProjecao.R0[2]*self.planoProjecao.vetorNormal[2]
+    d0 = self.planoProjecao.P1[0]*self.planoProjecao.vetorNormal[0] \
+         + self.planoProjecao.P1[1]*self.planoProjecao.vetorNormal[1] \
+         + self.planoProjecao.P1[2]*self.planoProjecao.vetorNormal[2]
     d1 = self.pontoVista.A*self.planoProjecao.vetorNormal[0] \
          + self.pontoVista.B*self.planoProjecao.vetorNormal[1] \
          + self.pontoVista.C*self.planoProjecao.vetorNormal[2]
     d = d0 - d1
     
-    #   Matriz de Projeção = 
-    #[[d+ANx, ANy,  ANz,  -Ad0],
-    # [BNx,  d+BNy, BNz,  -Bd0],
-    # [CNx,   CNy, d+CNz, -Cd0],
-    # [Nx,    Ny,   Nz,   -d1 ]]
     matriz[0][0] = d + self.pontoVista.A*self.planoProjecao.vetorNormal[0]
     matriz[0][1] = self.pontoVista.A*self.planoProjecao.vetorNormal[1]
     matriz[0][2] = self.pontoVista.A*self.planoProjecao.vetorNormal[2]
@@ -42,9 +37,11 @@ class ProjPerspectiva:
     return matriz
   
   def projetarObjeto(self):
-    matrizResultado = [[0 for x in range(4)] for x in range(4)]
+    matrizResultado = [[0 for x in range(len(self.objeto.matrizPontos[0]))] for x in range(4)]
     
-    matrizResultado = [[sum(self.matrizProjecao[m][n] * self.objeto.matrizPontos[n][p] for n in range(4)) \
-                      for p in range(self.objeto.nVertices)] for m in range(4)]
+    for m in range(4):
+      for p in range(len(self.objeto.matrizPontos[0])):
+        for n in range(4):
+          matrizResultado[m][p] += self.matrizProjecao[m][n] * self.objeto.matrizPontos[n][p]
     return matrizResultado
     
