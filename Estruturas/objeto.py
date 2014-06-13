@@ -22,24 +22,24 @@ class Objeto:
     f = open(filename)
     pontos = True
     for linha in f:
-      linha = linha.strip()
+      linha = linha.strip()     
       if pontos and linha != "#":
         self.addPonto(linha)
       elif linha == "#":
         pontos = False
       elif not(pontos):
         self.addSuperficie(linha)
-  
+      
   def addPonto(self, linha):
     ponto = linha.split(' ')
     for i in range(len(ponto)):
-      ponto[i] = int(ponto[i])
+      ponto[i] = float(ponto[i])
     self.pontos.append(ponto)
     self.nPontos += 1
     
   def addSuperficie(self, linha):
     superficie = linha.split(' ')
     for i in range(len(superficie)):
-      superficie[i] = int(superficie[i])
+      superficie[i] = float(superficie[i])
     self.superficies.append(superficie)
     self.nSuperficies += 1

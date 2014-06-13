@@ -16,8 +16,10 @@ class ProjPerspectiva:
          + self.pontoVista.B*self.planoProjecao.vetorNormal[1] \
          + self.pontoVista.C*self.planoProjecao.vetorNormal[2]
     d = d0 - d1
+
+    print(d0, d1, d)
     
-    matriz[0][0] = d + self.pontoVista.A*self.planoProjecao.vetorNormal[0]
+    matriz[0][0] = d + self.pontoVista.A*self.planoProjecao.vetorNormal[0]    
     matriz[0][1] = self.pontoVista.A*self.planoProjecao.vetorNormal[1]
     matriz[0][2] = self.pontoVista.A*self.planoProjecao.vetorNormal[2]
     matriz[0][3] = -self.pontoVista.A*d0
@@ -34,6 +36,11 @@ class ProjPerspectiva:
     matriz[3][2] = self.planoProjecao.vetorNormal[2]
     matriz[3][3] = -d1
     
+  #  for m in range(4):
+   #     for n in range(4):
+    #        print(matriz[m][n]);
+
+
     return matriz
   
   def projetarObjeto(self):

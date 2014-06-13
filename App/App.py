@@ -101,12 +101,12 @@ class App:
     for sup in self.objeto.superficies:
       for i in range(len(sup)):
         if (i == len(sup)-1):
-          ponto1 = sup[i]
-          ponto2 = sup[0]
+          ponto1 = int(sup[i])
+          ponto2 = int(sup[0])
         else:
-          ponto1 = sup[i]
-          ponto2 = sup[i+1]
-        self.saidaGrafica.create_line(matriz[0][ponto1], matriz[1][ponto1], matriz[0][ponto2], matriz[1][ponto2])
+          ponto1 = int(sup[i])
+          ponto2 = int(sup[i+1])
+        self.saidaGrafica.create_line(round(matriz[0][ponto1]), round(matriz[1][ponto1]), round(matriz[0][ponto2]), round(matriz[1][ponto2]))
   
   def arquivoObjeto(self):
     self.filename = askopenfilename()
