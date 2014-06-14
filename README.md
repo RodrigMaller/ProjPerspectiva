@@ -1,10 +1,10 @@
 ProjPerspectiva
 ===============
 
+Aplicação que faz uma Projeção Perspectiva usando a biblioteca GUI Tkinter do Python.
+
 Execução
 --------
-
-Aplicação que faz uma Projeção Perspectiva usando a biblioteca GUI Tkinter do Python.
 
 Para rodar o programa é necessário o Python 2.7 ou superior. O arquivo que deverá ser executado é o *main.py*. Para executar em linha de comando, vá até a pasta onde o arquivo está e digite:
     
