@@ -17,7 +17,7 @@ class ProjPerspectiva:
          + self.pontoVista.C*self.planoProjecao.vetorNormal[2]
     d = d0 - d1
 
-    print(d0, d1, d)
+    #print(d0, d1, d)
     
     matriz[0][0] = d + self.pontoVista.A*self.planoProjecao.vetorNormal[0]    
     matriz[0][1] = self.pontoVista.A*self.planoProjecao.vetorNormal[1]
